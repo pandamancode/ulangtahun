@@ -39,7 +39,7 @@ class _MessagePageState extends State<MessagePage> {
     setState(() {
       pesanTeks = preferences.getString("pesan");
       String repNama = pesanTeks!.replaceAll('[nama]', widget.nama.toString());
-      String fullMessage = repNama!.replaceAll('[umur]', widget.usia.toString());
+      String fullMessage = repNama.replaceAll('[umur]', widget.usia.toString());
       pesanController.text = fullMessage.toString();
     });
   }
