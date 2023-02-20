@@ -1,3 +1,4 @@
+import 'package:birthday/pages/login_page.dart';
 import 'package:birthday/pages/personil_page.dart';
 import 'package:birthday/theme.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  //const HomePage({super.key});
+  final VoidCallback signOut;
+  const HomePage(this.signOut, {super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,6 +21,50 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       preferences.setString("golongan", golongan);
     });
+  }
+
+  void logOut() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      preferences.remove("status");
+      preferences.remove("nama");
+      preferences.remove("pesan");
+      preferences.remove("uname");
+    });
+  }
+
+  void exitApp() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Konfirmasi"),
+          content: const Text("Yakin Ingin Keluar dari Aplikasi?"),
+          actions: [
+            TextButton(
+              child: const Text("Ya"),
+              onPressed: () {
+                logOut();
+                widget.signOut();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => const LoginPage(),
+                  ),
+                  (route) => false,
+                );
+              },
+            ),
+            TextButton(
+              child: const Text("Tidak"),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -49,6 +96,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            
             listGolongan(),
             footer(),
           ],
@@ -66,8 +114,7 @@ class _HomePageState extends State<HomePage> {
       height: MediaQuery.of(context).size.height,
       decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(
-              "assets/bg.png"),
+          image: AssetImage("assets/bg.png"),
           opacity: 0.1,
           fit: BoxFit.contain,
         ),
@@ -199,6 +246,30 @@ class _HomePageState extends State<HomePage> {
                 trailing: const Icon(Icons.chevron_right),
               ),
             ),
+          ),
+
+          InkWell(
+            onTap: (){
+              exitApp();
+            },
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 80,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: secondColor,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: const Center(
+                      child: Icon(Icons.exit_to_app,color: Colors.white,),
+                    ),
+                  ),
+                ),
+              ),
           ),
         ],
       ),

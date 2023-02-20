@@ -1,6 +1,7 @@
 import 'package:birthday/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
@@ -23,12 +24,30 @@ class MessagePage extends StatefulWidget {
 class _MessagePageState extends State<MessagePage> {
   TextEditingController pesanController = TextEditingController();
 
+  String? pesanTeks;
+
   void sendWhatsapp() async {
     final link = WhatsAppUnilink(
       phoneNumber: '+62' + widget.whatsappNumber.toString(),
       text: pesanController.text.toString(),
     );
     await launch('$link');
+  }
+
+  void getPref() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    setState(() {
+      pesanTeks = preferences.getString("pesan");
+      String repNama = pesanTeks!.replaceAll('[nama]', widget.nama.toString());
+      String fullMessage = repNama!.replaceAll('[umur]', widget.usia.toString());
+      pesanController.text = fullMessage.toString();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getPref();
   }
 
   @override

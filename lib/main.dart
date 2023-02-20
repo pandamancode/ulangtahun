@@ -1,4 +1,5 @@
 import 'package:birthday/pages/home_page.dart';
+import 'package:birthday/pages/login_page.dart';
 import 'package:birthday/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     );
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
