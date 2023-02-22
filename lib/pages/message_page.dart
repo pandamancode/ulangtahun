@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
+// ignore: must_be_immutable
 class MessagePage extends StatefulWidget {
   String? nrp;
   String? nama;
@@ -28,9 +29,10 @@ class _MessagePageState extends State<MessagePage> {
 
   void sendWhatsapp() async {
     final link = WhatsAppUnilink(
-      phoneNumber: '+62' + widget.whatsappNumber.toString(),
+      phoneNumber: '+62${widget.whatsappNumber}',
       text: pesanController.text.toString(),
     );
+    // ignore: deprecated_member_use
     await launch('$link');
   }
 
@@ -38,7 +40,8 @@ class _MessagePageState extends State<MessagePage> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     setState(() {
       pesanTeks = preferences.getString("pesan");
-      String repNama = pesanTeks!.replaceAll('[nama]', widget.nama.toString());
+      String fullname = "${widget.jabatan} ${widget.nama}";
+      String repNama = pesanTeks!.replaceAll('[nama]', fullname);
       String fullMessage = repNama.replaceAll('[umur]', widget.usia.toString());
       pesanController.text = fullMessage.toString();
     });
@@ -90,35 +93,38 @@ class _MessagePageState extends State<MessagePage> {
                           const SizedBox(
                             width: 8,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${widget.nama}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
+                          Expanded(
+                            flex: 10,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${widget.nama}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${widget.nrp}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  "${widget.nrp}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${widget.jabatan}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  "${widget.jabatan}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${widget.usia}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  "${widget.usia}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -153,6 +159,9 @@ class _MessagePageState extends State<MessagePage> {
                                 ),
                               ),
                             ),
+                          ),
+                          const SizedBox(
+                            height: 8,
                           ),
                           ElevatedButton.icon(
                             onPressed: () {

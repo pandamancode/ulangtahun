@@ -1,4 +1,3 @@
-import 'package:birthday/pages/home_page.dart';
 import 'package:birthday/pages/login_page.dart';
 import 'package:birthday/theme.dart';
 import 'package:flutter/material.dart';

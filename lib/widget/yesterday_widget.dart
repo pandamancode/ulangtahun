@@ -89,7 +89,7 @@ class _YesterdayWidgetState extends State<YesterdayWidget> {
                 ),
               ),
               Text(
-                '${golongan}',
+                '$golongan',
                 style: GoogleFonts.poppins(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
@@ -140,8 +140,8 @@ class _YesterdayWidgetState extends State<YesterdayWidget> {
                 (result[index]['foto'] == null)
                     ? fotoProfil =
                         "http://ulayyasoft.my.id/sdm/public/images/default.png"
-                    : fotoProfil =
-                        path.toString() + "/" + result[index]['foto'];
+                    : fotoProfil = "${path}/${result[index]['foto']}";
+                       // path.toString() + "/" + result[index]['foto'];
 
                 return GestureDetector(
                   onTap: () {
@@ -163,7 +163,7 @@ class _YesterdayWidgetState extends State<YesterdayWidget> {
                   },
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    height: 110,
+                    height: 115,
                     child: Card(
                       color: mainColor,
                       child: Row(
@@ -171,7 +171,7 @@ class _YesterdayWidgetState extends State<YesterdayWidget> {
                         children: [
                           Container(
                             width: 90,
-                            height: 110,
+                            height: 115,
                             decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: NetworkImage(fotoProfil.toString()),
@@ -182,46 +182,40 @@ class _YesterdayWidgetState extends State<YesterdayWidget> {
                           const SizedBox(
                             width: 8,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "${result[index]['nama']}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
+                          Expanded(
+                            flex: 10,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "${result[index]['nama']}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${result[index]['nrp']}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  "${result[index]['nrp']}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${result[index]['jabatan']}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  "${result[index]['jabatan']}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${result[index]['umur']}",
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w400,
+                                Text(
+                                  "${result[index]['umur']}",
+                                  style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Center(
-                            child: Icon(
-                              Icons.card_giftcard_sharp,
-                              color: secondColor,
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            width: 2,
-                          ),
+                          
                         ],
                       ),
                     ),

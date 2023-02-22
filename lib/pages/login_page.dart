@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [mainColor,Color.fromARGB(255, 236, 194, 131)],
+                    colors: [mainColor,const Color.fromARGB(255, 236, 194, 131)],
                     begin: FractionalOffset.topCenter,
                     end: FractionalOffset.bottomCenter,
                   ),
