@@ -12,9 +12,10 @@ class MessagePage extends StatefulWidget {
   String? jabatan;
   String? usia;
   String? whatsappNumber;
+  String? fulljabatan;
   String? foto;
 
-  MessagePage(this.nrp, this.nama, this.jabatan, this.usia, this.whatsappNumber,
+  MessagePage(this.nrp, this.nama, this.jabatan, this.usia, this.whatsappNumber, this.fulljabatan,
       this.foto,
       {super.key});
 
@@ -103,24 +104,28 @@ class _MessagePageState extends State<MessagePage> {
                                   "${widget.nama}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
+                                    fontSize: 13,
                                   ),
                                 ),
                                 Text(
-                                  "${widget.nrp}",
+                                  "${widget.nrp} / ${widget.jabatan}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  "${widget.jabatan}",
+                                  "${widget.fulljabatan}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  "${widget.usia}",
+                                  "Umur ${widget.usia}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
                                 ),
                               ],
@@ -140,6 +145,9 @@ class _MessagePageState extends State<MessagePage> {
                       child: Column(
                         children: [
                           TextFormField(
+                            style: TextStyle(
+                              fontSize: 13,
+                            ),
                             controller: pesanController,
                             minLines: 4,
                             maxLines: null,
@@ -147,7 +155,7 @@ class _MessagePageState extends State<MessagePage> {
                               labelText: 'Pesan',
                               labelStyle: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: 16,
                               ),
                               suffixIcon: Icon(
                                 Icons.message,

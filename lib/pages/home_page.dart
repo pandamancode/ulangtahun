@@ -247,6 +247,35 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
+          Card(
+            color: mainColor,
+            child: GestureDetector(
+              onTap: () {
+                savePref('TAMTAMA');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return const PersonilPage();
+                    },
+                  ),
+                );
+              },
+              child: ListTile(
+                title: Text(
+                  "TAMTAMA",
+                  style: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                subtitle: Text(
+                  "Tamtama",
+                  style: GoogleFonts.poppins(),
+                ),
+                trailing: const Icon(Icons.chevron_right),
+              ),
+            ),
+          ),
 
           InkWell(
             onTap: (){

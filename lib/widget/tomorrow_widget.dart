@@ -154,6 +154,7 @@ class _TomorrowWidgetState extends State<TomorrowWidget> {
                             result[index]['jabatan'].toString(),
                             result[index]['umur'].toString(),
                             result[index]['whatsapp'].toString(),
+                            result[index]['full_jabatan'].toString(),
                             fotoProfil.toString(),
                           );
                         },
@@ -189,26 +190,32 @@ class _TomorrowWidgetState extends State<TomorrowWidget> {
                               children: [
                                 Text(
                                   "${result[index]['nama']}",
+                                  maxLines: 2,
+                                  overflow: TextOverflow.visible,
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w600,
+                                    fontSize: 13,
                                   ),
                                 ),
                                 Text(
-                                  "${result[index]['nrp']}",
+                                  "${result[index]['nrp']} / ${result[index]['jabatan']}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  "${result[index]['jabatan']}",
+                                  "${result[index]['full_jabatan']}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
                                 ),
                                 Text(
-                                  "${result[index]['umur']}",
+                                  "Umur ${result[index]['umur']}",
                                   style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.w400,
+                                    fontSize: 12,
                                   ),
                                 ),
                               ],
